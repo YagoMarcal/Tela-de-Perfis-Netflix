@@ -1,0 +1,123 @@
+/* Variáveis de tema */
+:root{
+	/* cor de fundo principal */
+	--bg:#141414;
+	/* cor de cartões (não usado diretamente aqui, disponível) */
+	--card:#1f1f1f;
+	/* cor do texto principal */
+	--text:#e6e6e6;
+	/* cor de texto secundário/menos importante */
+	--muted:#8c8c8c;
+	/* cor de destaque (vermelho Netflix) */
+	--accent:#e50914;
+}
+
+/* box-sizing para facilitar cálculos de largura/altura */
+*{box-sizing:border-box}
+
+/* garante que html e body ocupem 100% da altura quando necessário */
+html,body{height:100%}
+
+body{
+	/* remove margens padrão do browser */
+	margin:0;
+	/* gradiente sutil de fundo escuro */
+	background:linear-gradient(180deg,var(--bg) 0%, #0f0f0f 100%);
+	/* cor do texto baseada na variável */
+	color:var(--text);
+	/* pilha de fontes preferencial para aparência nativa */
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	/* suavização de fontes para melhor renderização */
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+	/* garante altura mínima da viewport */
+	min-height:100vh;
+	/* centraliza o conteúdo vertical e horizontalmente */
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	/* espaçamento interno da página */
+	padding:2rem;
+}
+
+/* largura máxima do conteúdo principal */
+main{width:100%;max-width:980px}
+
+/* título principal: tamanho, margem e alinhamento */
+h1{font-size:2.25rem;margin:0 0 1.5rem;text-align:center;font-weight:700;letter-spacing: -0.02em}
+
+/* container dos perfis alinhado ao centro */
+.profiles{display:flex;justify-content:center}
+.profiles .profile{display:inline-block;text-align:center;max-width:160px}
+.profiles .profile a,
+.profiles .profile{color:inherit;text-decoration:none}
+
+/* remove margem padrão da figura */
+.profile figure{margin:0}
+
+/* imagem do perfil: tamanho fixo, arredondamento e comportamento de encaixe */
+.profile img{
+	width:160px;                 /* largura fixa do avatar */
+	height:160px;                /* altura fixa do avatar */
+	object-fit:cover;            /* cobre a caixa mantendo proporção */
+	border-radius:8px;           /* cantos arredondados */
+	display:block;               /* remove espaços em linha */
+	box-shadow:0 10px 25px rgba(0,0,0,0.6); /* sombra para destaque */
+	transition:                  /* transição suave para transform, sombra e cor da borda */
+		transform .22s cubic-bezier(.2,.9,.3,1),
+		box-shadow .22s,
+		border-color .18s;
+	border:1px solid transparent; /* borda inicial transparente (1px) para evitar salto ao mudar a cor */
+}
+
+/* efeito de zoom ao passar o cursor no container do perfil (ajuste visual) */
+.profile:hover {
+	transform:scale(1.08);       /* amplia o elemento pai levemente */
+}
+
+/* regras genéricas de imagem que aparecem em outro seletor: mantém consistência para imagens menores */
+img{
+	width:120px;                  /* largura alternativa para imagens genéricas */
+	height:120px;                 /* altura correspondente */
+	border-radius:8px;            /* cantos arredondados */
+	object-fit: cover;            /* mantém proporção ao preencher a caixa */
+	margin-bottom:0.5rem;         /* espaçamento abaixo da imagem */
+	background:#222;              /* fallback de cor enquanto a imagem carrega */
+}
+
+/* quando se passa o cursor sobre qualquer imagem: adiciona borda branca visível */
+img:hover{
+	border:1px solid #ffffff;     /* borda branca de 1px no hover */
+}
+
+/* legenda do perfil: espaçamento e cor secundária */
+.profile figcaption{margin-top:.6rem;color:var(--muted);font-size:.95rem}
+
+/* hover/focus no link do perfil: eleva, aplica escala e borda branca no avatar */
+.profile a:focus img,
+.profile a:hover img{
+	transform:translateY(-6px) scale(1.08); /* move pra cima e amplia a imagem */
+	border-color:#ffffff;                  /* torna a borda visível e branca */
+	box-shadow:0 18px 40px rgba(0,0,0,0.75); /* sombra mais pronunciada ao interagir */
+}
+
+/* foco por teclado: remove outline padrão e aplica foco visual customizado */
+.profile a:focus{outline:none}
+.profile a:focus-visible{box-shadow:0 0 0 3px rgba(229,9,20,0.18);border-radius:10px}
+
+/* responsividade para telas pequenas: reduz tamanhos e espaçamentos */
+@media (max-width:560px){
+	h1{font-size:1.5rem}
+	.profile img{width:110px;height:110px}
+	.profiles .profile{max-width:110px;margin:0 .4rem}
+	body{padding:1rem}
+}
+
+/* ajuda para conteúdos acessíveis escondidos visualmente */
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* container utilitário com largura máxima e centralização */
+.container{max-width:1200px;margin:0 auto;padding:0 1rem}
+
+/* classe utilitária para texto em cor de destaque */
+.accent{color:var(--accent)}
